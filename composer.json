@@ -1,0 +1,42 @@
+{
+    "name": "tankfairies/tcrypt",
+    "description": "End to end encryption hanlder",
+    "type": "library",
+    "keywords": ["encryption", "sodium"],
+    "homepage": "https://tankfairies.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jon",
+            "email": "jon@tankfairies.com",
+            "role": "lead"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/tankfairies/tcrypt/issues"
+    },
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tankfairies\\Tcrypt\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "codeception/codeception": "^3.0"
+    },
+    "config": {
+        "platform": {
+            "php": "7.3.0"
+        },
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
