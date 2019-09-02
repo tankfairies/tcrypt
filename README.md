@@ -1,4 +1,4 @@
-[![License](https://poser.pugx.org/tankfairies/luhn/license)](https://packagist.org/packages/tankfairies/luhn)
+[![License](https://poser.pugx.org/tankfairies/luhn/license)](https://packagist.org/packages/tankfairies/tcrypt)
 
 # Tcrypt
 
