@@ -38,23 +38,16 @@ class DecryptTest extends Unit
             ]
         );
 
-        $receiveKeys = $this->make(
-            'Tankfairies\Tcrypt\Keys',
-            [
-                'getPublicKey' => function () {
-                    return hex2bin("751c65c02aee08d307334f0ff2adf1c72e70e7f16e4b93dead1f412d11d86353");
-                }
-            ]
-        );
 
         $crypt = new Encrypt();
-        $crypt->setLocalKeys($sendKeys)->setForeignKey($receiveKeys->getPublicKey());
+        $crypt->setLocalKeys($sendKeys)
+            ->setForeignKey(hex2bin("751c65c02aee08d307334f0ff2adf1c72e70e7f16e4b93dead1f412d11d86353"));
 
         $snd = $crypt->enc('my secret message');
 
         $this->decrypt
             ->setLocalKeys($sendKeys)
-            ->setForeignKey($receiveKeys->getPublicKey());
+            ->setForeignKey(hex2bin("751c65c02aee08d307334f0ff2adf1c72e70e7f16e4b93dead1f412d11d86353"));
 
         $this->assertEquals('my secret message', $this->decrypt->dec($snd));
     }
