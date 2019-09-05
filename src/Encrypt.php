@@ -10,6 +10,8 @@
 
 namespace Tankfairies\Tcrypt;
 
+use Exception;
+
 /**
  * Class Encrypt
  *
@@ -22,7 +24,7 @@ class Encrypt extends AbstractCrypt
      *
      * @param string $message
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
     public function enc(string $message): string
     {

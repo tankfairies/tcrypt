@@ -45,9 +45,14 @@ class AbstractCrypt
      *
      * @param string $foreignKey
      * @return AbstractCrypt
+     * @throws TcryptException
      */
     public function setForeignKey(string $foreignKey): self
     {
+        if (empty($foreignKey)) {
+            throw new TcryptException('foreign key not set');
+        }
+
         $this->foreignKey = $foreignKey;
         return $this;
     }
@@ -56,6 +61,7 @@ class AbstractCrypt
      * Generates the key from the keypair
      *
      * @return string
+     * @throws TcryptException
      */
     protected function key(): string
     {

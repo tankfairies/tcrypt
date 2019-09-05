@@ -22,6 +22,7 @@ class Decrypt extends AbstractCrypt
      *
      * @param string $message
      * @return string
+     * @throws TcryptException
      */
     public function dec(string $message): string
     {

@@ -32,9 +32,18 @@ class Keys
     /**
      * @param string $password
      * @param string $salt
+     * @throws TcryptException
      */
     public function setPasswordAndSalt(string $password, string $salt): void
     {
+        if (empty($password)) {
+            throw new TcryptException('no password set');
+        }
+
+        if (mb_strlen($salt) < 16) {
+            throw new TcryptException('salt need to be at least 15 chars long');
+        }
+
         $seed = Sodium_crypto_pwhash(
             SODIUM_CRYPTO_BOX_SEEDBYTES,
             $password,
@@ -52,9 +61,14 @@ class Keys
      * Returns the private key
      *
      * @return string
+     * @throws TcryptException
      */
     public function getSecretKey(): string
     {
+        if (empty($this->secretKey)) {
+            throw new TcryptException('password and salt not set');
+        }
+
         return $this->secretKey;
     }
 
@@ -62,9 +76,14 @@ class Keys
      * Returns the public key
      *
      * @return string
+     * @throws TcryptException
      */
     public function getPublicKey(): string
     {
+        if (empty($this->secretKey)) {
+            throw new TcryptException('password and salt not set');
+        }
+
         return $this->publicKey;
     }
 }
