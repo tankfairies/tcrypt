@@ -1,32 +1,28 @@
 <?php
 
-namespace Tests;
+namespace Tests\unit;
 
 use \Codeception\Test\Unit;
 use Tankfairies\Tcrypt\Decrypt;
 use Tankfairies\Tcrypt\Encrypt;
+use Tankfairies\Tcrypt\TcryptException;
+use UnitTester;
+use SodiumException;
+use Exception;
 
 class DecryptTest extends Unit
 {
 
-    protected $decrypt;
+    /**
+     * @var UnitTester
+     */
+    protected UnitTester $tester;
 
     /**
-     * @var \UnitTester
+     * @throws TcryptException
+     * @throws SodiumException
+     * @throws Exception
      */
-    protected $tester;
-
-    protected function _before()
-    {
-        $this->decrypt = new Decrypt();
-    }
-
-    protected function _after()
-    {
-        $this->decrypt = null;
-    }
-
-
     public function testDec()
     {
         $sendKeys = $this->make(
@@ -38,17 +34,17 @@ class DecryptTest extends Unit
             ]
         );
 
-
         $crypt = new Encrypt();
         $crypt->setLocalKeys($sendKeys)
             ->setForeignKey(hex2bin("751c65c02aee08d307334f0ff2adf1c72e70e7f16e4b93dead1f412d11d86353"));
 
         $snd = $crypt->enc('my secret message');
 
-        $this->decrypt
+        $decrypt = new Decrypt();
+        $decrypt
             ->setLocalKeys($sendKeys)
             ->setForeignKey(hex2bin("751c65c02aee08d307334f0ff2adf1c72e70e7f16e4b93dead1f412d11d86353"));
 
-        $this->assertEquals('my secret message', $this->decrypt->dec($snd));
+        $this->assertEquals('my secret message', $decrypt->dec($snd));
     }
 }

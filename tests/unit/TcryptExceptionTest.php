@@ -1,28 +1,21 @@
 <?php
 
-namespace Tests\Libs;
+namespace Tests\unit;
 
-use \Codeception\Test\Unit;
+use Codeception\Test\Unit;
 use Tankfairies\Tcrypt\TcryptException;
+use UnitTester;
 
 class TcryptExceptionTest extends Unit
 {
     /**
-     * @var \UnitTester
+     * @var UnitTester
      */
-    protected $tester;
-    
-    protected function _before()
-    {
-    }
-
-    protected function _after()
-    {
-    }
+    protected UnitTester $tester;
 
     public function testException()
     {
-        $this->tester->expectException(
+        $this->tester->expectThrowable(
             new TcryptException('this is a test'),
             function () {
                 throw new TcryptException('this is a test');

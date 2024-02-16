@@ -1,57 +1,61 @@
 <?php
 
-namespace Tests;
+namespace Tests\unit;
 
-use \Codeception\Test\Unit;
+use Codeception\Test\Unit;
 use ReflectionProperty;
 use Tankfairies\Tcrypt\AbstractCrypt;
 use Tankfairies\Tcrypt\TcryptException;
+use UnitTester;
+use ReflectionException;
+use Exception;
 
 class AbstractCryptTest extends Unit
 {
 
     /**
-     * @var \UnitTester
+     * @var UnitTester
      */
-    protected $tester;
+    protected UnitTester $tester;
 
-    protected function _before()
-    {
-    }
-
-    protected function _after()
-    {
-    }
-
+    /**
+     * @throws ReflectionException
+     * @throws Exception
+     */
     public function testSetLocalKeys()
     {
-        $mock = $this->getMockForAbstractClass('Tankfairies\Tcrypt\AbstractCrypt');
+        $mock = new class extends AbstractCrypt {
+        };
 
         $keys = $this->make('Tankfairies\Tcrypt\Keys');
         $mock->setLocalKeys($keys);
 
         $reflection = new ReflectionProperty($mock, 'localKeys');
-        $reflection->setAccessible(true);
         $this->assertEquals($keys, $reflection->getValue($mock));
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws TcryptException
+     * @throws Exception
+     */
     public function testSetForeignKeys()
     {
-        $mock = $this->getMockForAbstractClass('Tankfairies\Tcrypt\AbstractCrypt');
+        $mock = new class extends AbstractCrypt {
+        };
 
-        $keys = $this->make('Tankfairies\Tcrypt\Keys');
         $mock->setForeignKey('12345678901234567890');
 
         $reflection = new ReflectionProperty($mock, 'foreignKey');
-        $reflection->setAccessible(true);
         $this->assertEquals('12345678901234567890', $reflection->getValue($mock));
     }
 
     public function testSetForeignKeyNotSet()
     {
-        $mock = $this->getMockForAbstractClass('Tankfairies\Tcrypt\AbstractCrypt');
+        $mock = new class extends AbstractCrypt {
+        };
 
-        $this->tester->expectException(
+        $this->tester->expectThrowable(
             new TcryptException('foreign key not set'),
             function () use ($mock) {
                 $mock->setForeignKey('');

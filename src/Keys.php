@@ -10,6 +10,8 @@
 
 namespace Tankfairies\Tcrypt;
 
+use SodiumException;
+
 /**
  * Class Keys
  *
@@ -22,17 +24,18 @@ class Keys
     /**
      * @var string
      */
-    private $secretKey;
+    private string $secretKey;
 
     /**
      * @var string
      */
-    private $publicKey;
+    private string $publicKey;
 
     /**
      * @param string $password
      * @param string $salt
      * @throws TcryptException
+     * @throws SodiumException
      */
     public function setPasswordAndSalt(string $password, string $salt): void
     {

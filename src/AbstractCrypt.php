@@ -10,6 +10,8 @@
 
 namespace Tankfairies\Tcrypt;
 
+use SodiumException;
+
 /**
  * Class AbstractCrypt
  *
@@ -21,12 +23,12 @@ class AbstractCrypt
     /**
      * @var string
      */
-    protected $foreignKey;
+    protected string $foreignKey;
 
     /**
      * @var Keys
      */
-    protected $localKeys;
+    protected Keys $localKeys;
 
     /**
      * Sets the key pair
@@ -62,6 +64,7 @@ class AbstractCrypt
      *
      * @return string
      * @throws TcryptException
+     * @throws SodiumException
      */
     protected function key(): string
     {

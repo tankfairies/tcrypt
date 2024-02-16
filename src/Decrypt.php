@@ -10,6 +10,8 @@
 
 namespace Tankfairies\Tcrypt;
 
+use SodiumException;
+
 /**
  * Class Decrypt
  *
@@ -23,6 +25,7 @@ class Decrypt extends AbstractCrypt
      * @param string $message
      * @return string
      * @throws TcryptException
+     * @throws SodiumException
      */
     public function dec(string $message): string
     {
