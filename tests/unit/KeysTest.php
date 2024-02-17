@@ -101,7 +101,7 @@ class KeysTest extends Unit
 
         $this->assertEquals(
             "751c65c02aee08d307334f0ff2adf1c72e70e7f16e4b93dead1f412d11d86353",
-            bin2hex($keys->getPublicKey())
+            $keys->getPublicKey()
         );
     }
 

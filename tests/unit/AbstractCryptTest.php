@@ -47,7 +47,7 @@ class AbstractCryptTest extends Unit
         $mock->setForeignKey('12345678901234567890');
 
         $reflection = new ReflectionProperty($mock, 'foreignKey');
-        $this->assertEquals('12345678901234567890', $reflection->getValue($mock));
+        $this->assertEquals(hex2bin('12345678901234567890'), $reflection->getValue($mock));
     }
 
     public function testSetForeignKeyNotSet()

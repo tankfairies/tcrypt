@@ -38,14 +38,14 @@ class EncryptTest extends Unit
         $encrypt = new Encrypt();
         $encrypt
             ->setLocalKeys($sendKeys)
-            ->setForeignKey(hex2bin("751c65c02aee08d307334f0ff2adf1c72e70e7f16e4b93dead1f412d11d86353"));
+            ->setForeignKey("751c65c02aee08d307334f0ff2adf1c72e70e7f16e4b93dead1f412d11d86353");
 
         $snd = $encrypt->enc('my secret message');
 
         $decrypt = new Decrypt();
         $decrypt
             ->setLocalKeys($sendKeys)
-            ->setForeignKey(hex2bin("751c65c02aee08d307334f0ff2adf1c72e70e7f16e4b93dead1f412d11d86353"));
+            ->setForeignKey("751c65c02aee08d307334f0ff2adf1c72e70e7f16e4b93dead1f412d11d86353");
 
         $this->assertEquals('my secret message', $decrypt->dec($snd));
     }
