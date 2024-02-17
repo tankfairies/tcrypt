@@ -87,6 +87,6 @@ class Keys
             throw new TcryptException('password and salt not set');
         }
 
-        return $this->publicKey;
+        return bin2hex($this->publicKey);
     }
 }

@@ -55,7 +55,7 @@ class AbstractCrypt
             throw new TcryptException('foreign key not set');
         }
 
-        $this->foreignKey = $foreignKey;
+        $this->foreignKey = hex2bin($foreignKey);
         return $this;
     }
 
